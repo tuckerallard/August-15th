@@ -14,9 +14,12 @@ import java.util.ArrayList;
 
 public class ReadAndWrite
 {
+
+	static ArrayList<String> countries = new ArrayList<>();
+	
 	public String readCountries()
 	{
-		ArrayList<String> countries = new ArrayList<>();
+		
 		
 		Path ourNewPath = Paths.get("\\Users\\admin\\newWorkspace\\ssa.tiy.week3.day10.august15\\src\\com\\ssa\\tiy\\assignment\\adventure\\countryListAdventure");
 		File ourNewFile = ourNewPath.toFile();
@@ -36,7 +39,7 @@ public class ReadAndWrite
 		{
 			e.printStackTrace();
 		}
-		
+
 		for (int i = 0; i < countries.size(); i++)
 		{
 			System.out.println(countries.get(i));
@@ -48,10 +51,10 @@ public class ReadAndWrite
 	public String writeCountries(String userCountry)
 	{
 		Path ourNewPath = Paths.get("\\Users\\admin\\newWorkspace\\ssa.tiy.week3.day10.august15\\src\\com\\ssa\\tiy\\assignment\\adventure\\countryListAdventure");
-		File aNewfile = ourNewPath.toFile();
+		File ourNewFile = ourNewPath.toFile();
 		
 		try(
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(aNewfile, true))))
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(ourNewFile, true))))
 			{
 				out.print(userCountry);
 				out.close();
@@ -62,6 +65,41 @@ public class ReadAndWrite
 			}
 		return null;
 	}
-	
+
+	public void deleteCountries()
+	{
+
+		Path ourNewPath = Paths.get("\\Users\\admin\\newWorkspace\\ssa.tiy.week3.day10.august15\\src\\com\\ssa\\tiy\\assignment\\adventure\\countryListAdventure");
+		File aNewfile = ourNewPath.toFile();
+		
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(aNewfile))))
+			{
+					out.print(countries.get(0));
+					out.close();
+			}
+		catch (IOException e)
+			{
+					e.printStackTrace();
+			}
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(aNewfile, true))))
+			{
+				for (int i = 0; i < (countries.size())-1; i++)
+				{
+					out.print(countries.get(i));
+				}
+				out.close();
+			} 
+		
+		catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+
+	}
+	public void deleteLastCountryFromArray()
+	{
+		countries.remove(countries.size() - 1);
+		countries.trimToSize();
+	}
 	
 }
